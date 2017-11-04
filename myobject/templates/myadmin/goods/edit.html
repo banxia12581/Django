@@ -1,0 +1,126 @@
+{% extends "myadmin/base.html" %}
+
+
+
+{% block mainbody %}		
+{% load static from staticfiles %}
+<link href="{% static 'myadmin/css/users.css' %}" rel="stylesheet">
+<script src="{% static 'myadmin/js/goods.js' %}"></script>
+<script src="{% static 'myadmin/js/layer.js' %}"></script>
+
+	<h3>
+		商品信息管理
+	</h3>
+	<form id="edit-profile" class="form-horizontal goodsadd" action="{% url 'myadmin_goodsupdate' goods.id%}" method="post" enctype="multipart/form-data">
+	<input type="hidden" name="oldpicname" value="{{ goods.picname }}"/>
+	{% csrf_token %}
+		<fieldset>
+			<legend>修改商品信息</legend>
+			<div class="control-group">
+				<label class="control-label" for="input01">商品名称:</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input01" name="goods" value="{{goods.goods}}" />
+					<label class="hidden hid-label" id="goodsVerify"></label> 
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">商品类别id:</label>
+				<div class="controls">
+					<select name="typeid">
+						{% for types in typeslists %}
+							<option
+								{% if types.pid == 0 %}
+								disable
+								{% endif %}
+								{% if  types.id == goods.typeid  %}
+									selected
+								{% endif %} 
+								value="{{goods.typeid}}">
+								{{types.name}}
+							</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">生产厂家:</label>
+				<div class="controls" id="goodsCompany">
+					<input type="text" class="input-xlarge" id="input01" name="company" value="{{goods.company}}" />
+					<label class="hidden hid-label" id="companyVerify"></label> 
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="textarea">简介:</label>
+				<div class="controls">
+					<textarea class="input-xlarge" id="textarea" rows="4" name="descr" value="{{goods.descr}}" ></textarea>
+					<label class="hidden hid-label" id="descrVerify"></label> 
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">单价:</label>
+				<div class="controls goodsprice">
+					<input type="number" class="input-xlarge goodsnum" id="input01"  name="price" value="{{goods.price}}" />
+					<em class="pricedw">元</em>
+					<label class="hidden hid-label" id="priceVerify"></label> 
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">图片:</label>
+				<div class="controls goodspic">
+					<div class="showcont">
+						<span class="show">
+						                <a id="img_a" target="_blank" class="nyroModal" rel="gal" href="/static/loadimg/{{ goods.picname }}">
+						                    <i id="img_i" class="fa icon-picture" onmouseover="layer.tips('&lt;img src=/static/loadimg/{{ goods.picname }}&gt;',this,{tips: [2, '#fff']});" onmouseout="layer.closeAll();"></i>
+						                </a>
+						</span>
+						<input type="text" class="input-xlarge" id="inputpic"  name="picnames"  value="{{goods.picname}}" />
+					</div>
+					<input type="file" class="input-xlarge" id="inputpicname"  name="pic"  />
+					<label class="hidden hid-label" id="picnameVerify"></label> 
+				</div>
+			</div>	
+			<div class="control-group">
+				<label class="control-label" for="input01">状态:</label>
+				<div class="controls">
+					<input type="hidden" name="state" id="goodStateChoice" value="{{goods.state}}">
+					<label class="state">
+					    <input type="radio" name="state" id="stateAdd" value="1" >
+					    	<span class="radio-text">新添加</span>
+					</label>
+					<label class="state">
+					  	<input type="radio" name="state" id="stateSale" value="2" >
+					    	<span class="radio-text">在售</span>
+					</label>
+					<label class="state">
+					  	<input type="radio" name="state" id="stateDown" value="3" >
+					    	<span class="radio-text">下架</span>
+					</label>
+				</div>
+			</div>	
+			<div class="control-group">
+				<label class="control-label" for="input01">库存量:</label>
+				<div class="controls">
+					<input type="number" class="input-xlarge goodsnum" id="input01" name="store" value="{{goods.store}}" />
+					<label class="hidden hid-label" id="storeVerify"></label> 
+
+				</div>
+			</div>										
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">修改</button> <button class="btn reset" type="reset">重置</button>
+			</div>
+		</fieldset>
+	</form>
+
+	<script type="text/javascript">
+		//商品状态默认选中状态
+		goodStateState();
+		//正则判断
+		addUsersVerify();
+
+		//单价保留两位小数
+		blTwoXs();
+
+		
+	</script>
+
+{% endblock %}

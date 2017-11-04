@@ -1,0 +1,124 @@
+{% extends "myadmin/base.html" %}
+
+
+
+{% block mainbody %}		
+{% load static from staticfiles %}
+<link href="{% static 'myadmin/css/users.css' %}" rel="stylesheet">
+<link href="{% static 'myadmin/css/detail.css' %}" rel="stylesheet">
+
+
+<h4>
+	订单详情展示
+</h4>
+<div class="page">
+	<div class="ncap-order-style">	 
+		<div class="ncap-order-details">
+			{% csrf_token %}
+			<input type="hidden" name="orderid" value="{{orderslist.id}}">
+				<div class="tabs-panels">
+					<div class="misc-info">
+						<h3>基本信息</h3>
+						<dl>
+							<dt>订单 ID：</dt>
+							<dd>{{orderslist.id}}</dd>
+							<dt>会员账号：</dt>
+							{% for user in userslist%}
+							{% if user.id == orderslist.uid%}
+							<dd>{{user.username}}</dd>
+							{% endif %}
+							{% endfor %}
+						</dl>
+						<dl>
+							<dt>电话：</dt>
+							<dd>{{orderslist.phone}}</dd>
+							<dt>应付金额：</dt>
+							￥<dd>{{orderslist.total}}</dd>
+						</dl>
+						<dl>
+							<dt>订单状态：</dt>
+							<input type="hidden" name="statuschange">
+							<dd class="ostate" sc="orderslist.status">
+								{% if orderslist.status == 0%}
+								新订单
+								<button  id="J_verify" class="btn btn-info btn-xs" style="display:inline-block;">确认发货</button>
+								<button  id="J_cancel" class="btn btn-info btn-xs" style="display:inline-block;">取消订单</button>
+								{% elif orderslist.status == 1%}
+								已发货
+								{% elif orderslist.status == 2%}
+								已收货
+								{% elif orderslist.status == 3%}
+								无效订单
+								{%endif%}
+							</dd>
+							<dt>下单时间：</dt>
+							<dd>{{orderslist.addtime}}</dd>
+							<!-- <dt>支付时间：</dt>
+							<dd>
+							2017-09-16 19:46                    </dd> -->
+						</dl>
+						<dl>
+							<dd>{{info}}</dd>
+						</dl>
+					</div>
+					<div class="addr-note">
+						<h4>收货信息</h4>
+						<dl>
+							<dt>收货人：</dt>
+							<dd>{{orderslist.linkman}}</dd>
+							<dt>联系方式：</dt>
+							<dd>{{orderslist.phone}}</dd>
+						</dl>
+						<dl>
+							<dt>收货地址：</dt>
+							<dd>{{orderslist.address}}</dd>
+						</dl>
+						<dl>
+							<dt>邮编：</dt>
+							<dd>{{orderslist.code}}</dd>
+						</dl>
+					</div>
+					<div class="goods-info">
+						<h4>商品信息</h4>
+
+						<table>
+							<thead>
+								<tr>
+								<th>商品ID</th>
+								<th >商品图片</th>
+								<th >商品名称</th>
+								<th>数量</th>
+								<th>单品价格</th>
+								<th>单品小计</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for details in detaillists%}
+								<tr>
+									<td class="w60">{{details.goodsid}}</td>
+									{% for good in goodslist%}
+										{% if details.goodsid == good.id%}
+										<td class="w30">
+											<div class="goods-thumb"><img alt="" src="/static/loadimg/c_xs_{{ good.picname }}"></div>
+										</td>
+										{% endif%}
+									{% endfor%}
+									<td style="text-align: left;">{{details.name}}<br></td>
+									<td class="w60">{{details.num}}</td>
+									<td class="w100">{{details.price}}</td>
+									<td class="w60">{% widthratio  details.price 1 details.num %}</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	//按钮点击订单状态修改
+	detailStatChange()
+
+</script>
+{% endblock %}

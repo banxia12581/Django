@@ -1,0 +1,126 @@
+{% extends "myweb/base.html" %}
+{% load static from staticfiles %}
+
+{#追加当前页的css样式#}
+{%block mylink%}
+  <link rel="stylesheet" type="text/css" href="{% static 'myweb/css/order.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'myweb/css/order-app.css' %}">
+{%endblock%}
+
+{# 加载主体内容 #}
+{%block content%}
+  
+    <!-- 主内容区域 -->
+    <div class="mainbody order order-app">
+	<div class="container">
+		<!-- 面包屑导航 -->
+		{% for order in orderlist%}
+		<div class="crumbs col-xs-12 col-sm-12">
+			<ol class="breadcrumb">
+				<li class="hidden-xs hidden-sm"><a href="{% url 'index'%}">首页</a></li>
+				<li class="hidden-xs hidden-sm"><a href="{% url 'member' %}">我的商城</a></li>
+				<li ><a href="{% url 'order' %}">我的订单</a></li>
+				<li class="active"><a href="{% url 'orderdetail' order.id%}">订单ID号{{order.id}}</a></li>
+			</ol>
+		</div><!-- 面包屑导航 E-->
+		
+		<div class="main clearfix">
+			<!-- 左侧导航 -->
+			{% include 'myweb/menu.html'%}
+			<!-- 左侧导航 E-->
+			<!-- 右侧内容展示 -->
+			<div class="right-content f-fr col-md-8 col-xs-12 col-sm-12">
+				<div class="order-main orderDetail-main">
+					<ul class="nav-tabs type-tab-btn clearfix hidden-xs hidden-sm" role="tablist-2">
+						<a href="javascript:;" class="active col-20">订单详情 </a>
+					</ul>
+					
+					<div class="item info status">
+						<div class="apply-back order-item">
+							<span class="order-status">订单状态：</span>
+							<span class="f-18">
+								{% if order.status == 0%}
+								新订单
+								{% elif order.status == 1%}
+								已发货
+								{% elif order.status == 2%}
+								已收货
+								{% elif order.status == 3%}
+								无效订单
+								{%endif%}
+							</span><br>
+						</div>
+					</div>
+					<div class="item product" id="products">
+						<div class="title clearfix">&nbsp;&nbsp;&nbsp;&nbsp;订单号：
+						<span>{{order.id}}
+						</span>
+						</div>
+						<table>
+							<tbody>
+							<tr>
+								<td class="product" colspan="2" style="padding-left: 44px;">
+								商品信息</td>
+								<td>单价</td>
+								<td>数量</td>
+								<td class="back-two">小计</td>
+							</tr>
+							{% for detail in detaillist%}
+							{% if detail.orderid == order.id%}
+							<tr class="b-b-dashed">
+								<td class="p-r">
+									{% for good in goodslist%}
+									{% if good.id == detail.goodsid%}
+									<a href="{% url 'detail' good.id%}" target="_blank">
+										<img src="/static/loadimg/l_md_{{ good.picname }}">
+									</a>
+									{% endif%}
+									{% endfor%}
+								</td>
+								<td class="product">
+									<span>
+										<a href="{% url 'detail' detail.id%}" target="_blank">
+										{{detail.name}}<br>
+										</a>
+									</span>
+								</td>
+								<td class="price">
+									<span>￥{{detail.price}}</span>
+								</td>
+								<td>{{detail.num}}</td>
+								<td class="bold back-two"> ￥{% widthratio  detail.price 1 detail.num %}</td>
+							</tr>
+							{% endif%}
+							{% endfor%}
+							</tbody>
+						</table>
+					</div>
+					<div class="item makeOrder">
+						<ul>
+							<li>
+								<span>总金额</span><span>￥{{order.total}}</span>
+							</li>
+							<li class="end">
+								<span>应付</span>
+								<span class="total big-red">￥{{order.total}}</span>
+							</li>
+						</ul>
+					</div>
+					<div class="editBox title">
+						<span class="title">收货人信息&nbsp;&nbsp;</span>
+					</div>
+					<div class="address">
+						<p>收货人：{{order.linkman}}</p>
+						<p>地址：{{order.address}}</p>
+						<p>电话：{{order.phone}}</p>
+						<p>邮编：{{order.code}}</p>
+					</div>
+					{% endfor%}
+				</div>
+			</div>
+		</div>	
+	</div>
+</div>
+<!-- 主内容区域 E-->
+	
+{%endblock%}

@@ -1,0 +1,175 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>网站后台管理</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="{% static 'myadmin/css/bootstrap.min.css' %}" rel="stylesheet">
+		<link href="{% static 'myadmin/css/bootstrap-responsive.min.css' %}" rel="stylesheet">
+		<link href="{% static 'myadmin/css/site.css' %}" rel="stylesheet">
+		<link href="{% static 'myadmin/css/users.css' %}" rel="stylesheet">
+		<!--[if lt IE 9]><script src="{% static 'myadmin/js/html5.js' %}"></script><![endif]-->
+		<script src="{% static 'myadmin/js/jquery.min.js' %}"></script>
+		<script src="{% static 'myadmin/js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'myadmin/js/site.js' %}"></script>
+		<script src="{% static 'myadmin/js/users.js' %}"></script>
+	</head>
+	<body>
+		<div class="container">
+			<!-- 头导航 -->
+			<div class="navbar">
+				<div class="navbar-inner">
+					<div class="container">
+						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="#">网站后台管理</a>
+						<div class="nav-collapse">
+							<ul class="nav">
+								<li class="active">
+									<a href="{% url 'myadmin_index'%}">首页</a>
+								</li>
+								<li>
+									<a href="#">在线设置</a>
+								</li>
+								<li>
+									<a href="#">帮助</a>
+								</li>
+								<li class="dropdown">
+									<a href="help.htm" class="dropdown-toggle" data-toggle="dropdown">更多 <b class="caret"></b></a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="#">Introduction Tour</a>
+										</li>
+										<li>
+											<a href="#">Project Organisation</a>
+										</li>
+										<li>
+											<a href="#">Task Assignment</a>
+										</li>
+										<li>
+											<a href="#">Access Permissions</a>
+										</li>
+										<li class="divider">
+										</li>
+										<li class="nav-header">
+											Files
+										</li>
+										<li>
+											<a href="#">How to upload multiple files</a>
+										</li>
+										<li>
+											<a href="#">Using file version</a>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<form class="navbar-search pull-left" action="">
+								<input type="text" class="search-query span2" placeholder="Search" />
+							</form>
+							<ul class="nav pull-right">
+								<li>
+								<a href="{% url 'myadmin_index'%}">@{{request.session.adminuser}}</a>
+								</li>
+								<li>
+									<a href="{% url 'myadmin_loginout'%}">退出</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div><!-- 头导航 E-->
+
+			<div class="row">
+				<div class="span3">
+					<!-- 侧边导航 -->
+					<div class="well" style="padding: 8px 0;">
+						<ul class="nav nav-list">
+							<li class="nav-header">
+								导航栏
+							</li>
+							<div class="level">
+								<li {% if request.path == '/myadmin/' %} class="active" {% endif %}>
+									<a href="{%url 'myadmin_index'%}" ><i class="icon-home"></i> 首页</a>
+								</li>
+							</div>
+							
+							<li class="nav-header">
+								会员管理
+							</li>
+							<div class="level">
+								<li {% if request.path == '/myadmin/users1' %} class="active" {% endif %}>
+									<a href="{% url 'myadmin_usersindex' 1%}" target="_top"><i class="icon-folder-open"></i> 浏览会员</a>
+								</li>
+								<li {% if request.path == '/myadmin/usersadd' %} class="active" {% endif %}>
+									<a href="{% url 'myadmin_usersadd'%}" target="_top"><i class="icon-check"></i> 添加会员</a>
+								</li>
+							</div>
+							<li class="nav-header">
+								商品类别管理
+							</li>
+							<div class="level">
+								<li {% if request.path == '/myadmin/types' %} class="active" {% endif %}>
+									<a href="{% url 'myadmin_typesindex'%}"><i class="icon-folder-open"></i> 浏览商品类别</a>
+								</li>
+								<li {% if request.path == '/myadmin/typesadd/0' %} class="active" {% endif %}>
+									<a href="{% url 'myadmin_typesadd' 0%}"><i class="icon-check"></i> 添加商品类别</a>
+								</li>
+							</div>
+							<li class="nav-header">
+								商品信息管理
+							</li>
+							<div class="level">
+								<li {% if request.path == '/myadmin/goods1' %} class="active" {% endif %}>
+									<a href="{% url 'myadmin_goodsindex' 1%}"><i class="icon-folder-open"></i> 浏览商品信息</a>
+								</li>
+								<li {% if request.path == '/myadmin/goodsadd' %} class="active" {% endif %}>
+									<a href="{% url 'myadmin_goodsadd'%}"><i class="icon-check"></i> 添加商品信息</a>
+								</li>
+							</div>
+							<li class="nav-header">
+								订单表管理
+							</li>
+							<div class="level">
+								<li {% if request.path == '/myadmin/orders/1' %} class="active" {% endif %}>
+									<a href="{% url 'myadmin_ordersindex' 1%}"><i class="icon-folder-open"></i> 订单表浏览</a>
+								</li>
+								<li {% if request.path == '/myadmin/ordernew/1' %} class="active" {% endif %}>
+									<a href="{% url 'myadmin_ordernew' 1%}"><i class="icon-folder-open"></i> 查看新添加订单</a>
+								</li>
+								<li {% if request.path == '/myadmin/orderoff/1' %} class="active" {% endif %}>
+									<a href="{% url 'myadmin_orderoff' 1%}"><i class="icon-folder-open"></i> 查看已发货订单</a>
+								</li>
+								<li {% if request.path == '/myadmin/orderreceive/1' %} class="active" {% endif %}>
+									<a href="{% url 'myadmin_orderreceive' 1%}"><i class="icon-folder-open"></i> 查看已收货订单</a>
+								</li>
+							</div>
+							<li class="divider">
+							</li>
+							<li class="nav-header">
+								扩展功能
+							</li>
+						</ul>
+					</div>
+					<!-- 侧边导航 E -->
+				</div>
+				<!-- 主体开始 -->
+				<div class="span9">
+				{%block mainbody%}
+				{%endblock%}
+				</div>
+				 <!-- 主体开始 E-->
+			</div>
+		</div>
+		<script type="text/javascript">
+			// 菜单栏切换实现部分
+			$('.well .nav .nav-header').click(function() {
+				$(this).addClass('current').next('.level').show();
+				$(this).siblings('.nav-header').removeClass('current').next('.level').hide();
+				return false;
+			});
+		</script>
+		<script type="text/javascript">  
+			//左侧导航切换选中
+			// leftNav();
+		</script> 
+	</body>
+</html>

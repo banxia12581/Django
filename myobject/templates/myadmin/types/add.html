@@ -1,0 +1,49 @@
+{% extends "myadmin/base.html" %}
+
+
+
+{% block mainbody %}		
+{% load static from staticfiles %}
+<link href="{% static 'myadmin/css/users.css' %}" rel="stylesheet">
+<script src="{% static 'myadmin/js/types.js' %}"></script>
+
+	<h3>
+		商品类别信息管理
+	</h3>
+	<form id="edit-profile" class="form-horizontal typesadd" action="{% url 'myadmin_typesinsert'%}" method="post">
+	{% csrf_token %}
+		<fieldset>
+			<legend>添加商品类别信息</legend>
+			<div class="control-group">
+				<label class="control-label" for="input02">商品父类</label>
+				<div class="controls">
+					<input type="hidden" name="typespid" value="{{typespid}}">
+					<input type="text" class="input-xlarge" id="input02" name="typespidname"  value="{{typespidname}}" />
+					<label class="hidden hid-label" id="tidVerify"></label> 
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">商品分类名称</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input01"  name="typesname" />
+					<label class="hidden hid-label" id="tnameVerify"></label> 
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input03">商品分类路径</label>
+				<div class="controls">
+					<input type="hidden" name="typespath" value="{{typespath}}">
+					<input type="text" class="input-xlarge" id="input03" name="typespaths" value="{{typespath}}" disabled="disabled" />
+					<label class="hidden hid-label" id="tpathVerify"></label> 
+				</div>
+			</div>						
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">添加</button> <button class="btn reset" type="reset">重置</button>
+			</div>
+		</fieldset>
+	</form>
+	<script type="text/javascript">
+		//正则判断
+		addTypeVerify();
+	</script>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<html lang="cn">
+	<head>
+		<meta charset="utf-8">
+		<title>商城后台管理登录</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="{% static 'myadmin/css/bootstrap.min.css' %}" rel="stylesheet">
+		<link href="{% static 'myadmin/css/bootstrap-responsive.min.css' %}" rel="stylesheet">
+		<link href="{% static 'myadmin/css/site.css' %}" rel="stylesheet">
+		<link href="{% static 'myadmin/css/users.css' %}" rel="stylesheet">
+		<style type="text/css">
+		body{
+			margin: 0;
+			padding: 0;
+			background-color: #f8fcff;
+		}
+		</style>
+		<!--[if lt IE 9]><script src="{% static 'myadmin/js/html5.js' %}"></script><![endif]-->
+	</head>
+	<body>
+		<div class="login">
+			<div id="login-page" class="container" style="">
+				<h1>商城后台管理登录</h1>
+				<form id="login-form" method="post" class="well" action="{% url 'myadmin_dologin' %}" enctype="multipart/form-data">
+					{% csrf_token %}
+					<span class="tit">账号：</span><input type="text" name="username" class="span2" placeholder="输入账号" /><br />
+					<span class="tit">密码：</span><input type="password" name="passwd" class="span2" placeholder="输入密码" /><br />
+					<span class="tit">验证码：</span><input type="text" name="showcode" size="6"/> 
+					<img src="{% url 'myadmin_showcode'%}" onclick="this.src='{% url 'myadmin_showcode' %}?id='+Math.random() "/>
+					<br />
+					<label class="checkbox"> <input type="checkbox" /> 记住密码 </label>
+					<button type="submit" class="btn btn-primary">登录</button>
+					<button type="reset" class="btn reset">重置</button>
+					<br/>
+					<span class="warntext">{{ info }}</span>
+				</form>	
+			
+			
+			</div>
+		</div>
+		<script src="{% static 'myadmin/js/jquery.min.js' %}"></script>
+		<script src="{% static 'myadmin/js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'myadmin/js/site.js' %}"></script>
+	</body>
+</html>

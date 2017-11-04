@@ -1,0 +1,150 @@
+{% extends "myweb/base.html" %}
+{% load static from staticfiles %}
+
+{#追加当前页的css样式#}
+{%block mylink%}
+  <link rel="stylesheet" type="text/css" href="{% static 'myweb/css/orderadd.css' %}">
+{%endblock%}
+
+{# 加载主体内容 #}
+{%block content%}
+  
+
+<!-- 主内容区域 -->
+<div class="mainbody orderadd orderorderadd-app">
+	<div class="container">
+		<!-- 面包屑 导航 -->
+		<div class="ml-nav hidden-xs hidden-sm">
+			<ol class="breadcrumb">
+				<ol class="breadcrumb">
+					<li>购物车</li>
+					<li >订单信息</li>
+					<li class="active">确认订单</li>
+					<li>支付</li>
+					<li>完成 </li>
+				</ol>
+			</ol>
+		</div><!-- 面包屑 导航 E-->
+
+		<!-- 收货人信息 -->
+		<form action="{% url 'ordersinsert' %}" method="post" >
+		{% csrf_token %}
+		<div class="order-address clearfix" id="addressModule">
+			<div class="order-address-title">
+			收货人信息
+			</div>
+			<div class=" address-adder col-md-8 col-sm-12 col-xs-12 col-md-offset-2">
+				<div class="address-adder-content">
+					
+					<div class="address-adder-row clearfix">
+						<div class="address-adder-title">收货人姓名<span class="address-adder-must">*</span></div>
+						<div class="mz-input-warp">
+							<input class="mz-input address-adder-name"  readonly value="{{request.POST.linkman}}" type="text" name="linkman">
+						</div>
+						<div class="address-adder-title">收货人手机号<span class="address-adder-must">*</span></div>
+						<div class="mz-input-warp">
+							<input class="mz-input address-adder-phone"  readonly value="{{request.POST.phone}}" type="text" name="phone">
+						</div>
+					</div>
+					<div class="address-adder-row clearfix">
+						<div class="address-adder-title">详细地址<span class="address-adder-must">*</span>
+						</div>
+						<div class="mz-input-warp">
+							<input class="mz-input address-adder-detail" readonly value="{{request.POST.address}}" maxlength="50" minlength="4" type="text" name="address">
+						</div>
+					</div>
+					<div class="address-adder-row clearfix">
+						<div class="address-adder-title">邮编</div>
+						<div class="mz-input-warp">
+							<input class="mz-input address-adder-detail"  readonly value="{{request.POST.code}}" type="text" name="code">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div><!-- 收货人信息 E-->
+		
+		<!-- 购物清单信息列表 -->
+		<div class="order-product">
+			<div class="order-product-title">确认订单信息</div>
+				<div class="order-product-list" id="orderProductList">
+				<table class="order-product-table" cellspacing="0" cellpadding="0">
+					<thead>
+						<tr>
+							<th class="order-product-table-id col-md-1 col-sm-1 col-xs-1">商品ID</th>
+							<th class="order-product-table-name col-md-6 col-sm-6 col-xs-6">商品名称</th>
+							<th class="order-product-table-price col-md-2 col-sm-2 col-xs-2">单价</th>
+							<th class="order-product-table-num col-md-1 col-sm-1 col-xs-1">数量</th>
+							<th class="order-product-table-total col-md-2 col-sm-2 col-xs-2">小计</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for order in request.session.orderlist.values %}
+						<tr class="orderaddpro">
+							<td class="order-product-table-id col-md-1 col-sm-1 col-xs-1">{{order.id}}</td>
+							<td class="order-product-table-name col-md-5 col-sm-5 col-xs-5">
+								<a target="_blank" class="order-product-link col-md-5 col-sm-5 col-xs-5" href="#">
+									<img class="order-product-image" src="/static/loadimg/c_xs_{{ order.picname }}" style="display: inline;">
+								</a>
+								<div class="order-product-name col-md-7 col-sm-7 col-xs-7">
+									<a target="_blank" class="order-product-link" href="{% url 'detail' order.id %}">
+										<p class="order-product-name-item">{{order.goods}}</p>
+										<p class="order-product-name-item">{{order.descr}}</p>
+									</a>
+								</div>
+							</td>
+							<td class="order-product-table-price col-md-2 col-sm-2 col-xs-2">
+								<p>
+									￥<span class="order-product-price">{{order.price}}</span>
+								</p>
+							</td>
+							<td class="order-product-table-num col-md-1 col-sm-1 col-xs-1">{{order.m}}</td>
+							<td class="order-product-table-total col-md-3 col-sm-3 col-xs-3">
+								<span style="color:#e02b41">￥</span><span class="order-product-price red">{% widthratio  order.price 1 order.m %}</span>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="5">
+								<div class="order-product-total">
+								合计：<span style="color:#e02b41">￥</span><span class="order-product-price red">{{request.session.total}}</span>
+								</div>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div><!-- 购物清单信息列表 E-->
+		<!-- 底部结算信息 -->
+		<div class="order-total clearfix " id="orderTotal">
+			<div class="order-total-pay-header">支付详情</div>
+			<div class="order-total-content">
+				<div class="order-total-row">
+					总金额:￥<div class="order-total-price" id="totalOrderPrice">{{request.session.total}}</div>
+				</div>
+				<div class="order-total-line"></div>
+				<div class="order-total-row">
+					应付：￥<div class="order-total-price total" id="totalPayPrice">{{request.session.total}}</div>
+				</div>
+				<div class="order-total-row order-total-valid-row clearfix">
+					<div class="order-total-valid" id="validCode"></div>
+					 <button type="submit" id="submitForm" class="btn btn-info " style="display:inline-block;">确认下单</button>
+				</div>
+			</div>
+		</div><!-- 底部结算信息 E -->
+		</form>
+	</div>
+</div>
+<!-- 主内容区域 E-->
+	
+<!-- 返回顶部 E-->
+<script type="text/javascript">//回顶部
+	//全选
+	allSelect();
+	//商品数量加减
+	cartAddMin();
+
+</script>
+    
+{%endblock%}

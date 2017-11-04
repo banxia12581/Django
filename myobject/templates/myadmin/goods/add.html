@@ -1,0 +1,105 @@
+{% extends "myadmin/base.html" %}
+
+
+
+{% block mainbody %}		
+{% load static from staticfiles %}
+<link href="{% static 'myadmin/css/users.css' %}" rel="stylesheet">
+<script src="{% static 'myadmin/js/goods.js' %}"></script>
+
+	<h3>
+		商品信息管理
+	</h3>
+	<form id="edit-profile" class="form-horizontal goodsadd" action="{% url 'myadmin_goodsinsert'%}" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+		<fieldset>
+			<legend>添加商品信息</legend>
+			<div class="control-group">
+				<label class="control-label" for="input01">商品类别:</label>
+				<div class="controls typesid">
+					<select name="gtypesid">
+						{% for types in typeslists %}
+						<option value="{{types.id}}" 
+						{% if types.pid == 0%}
+						disabled="" 
+						{% endif %}>
+							{{types.name }}
+						</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">商品名称:</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input01" name="goods" />
+					<label class="hidden hid-label" id="goodsVerify"></label> 
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">生产厂家:</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input01"  name="company" />
+					<label class="hidden hid-label" id="companyVerify"></label> 
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="textarea">简介:</label>
+				<div class="controls">
+					<textarea class="input-xlarge" id="textarea" rows="4" name="descr"></textarea>
+					<label class="hidden hid-label" id="descrVerify"></label> 
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">单价:</label>
+				<div class="controls goodsprice">
+					<input type="number" class="input-xlarge goodsnum" id="input01"  name="price" />
+					<em class="pricedw">元</em>
+					<label class="hidden hid-label" id="priceVerify"></label> 
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">图片:</label>
+				<div class="controls">
+					<input type="file" class="input-xlarge" id="input01"  name="picname" />
+					<label class="hidden hid-label" id="picnameVerify"></label> 
+				</div>
+			</div>	
+			<div class="control-group">
+				<label class="control-label" for="input01">状态:</label>
+				<div class="controls">
+					 <label class="state">
+					    <input type="radio" name="state" id="optionsRadios1" value="1" >
+					    	<span class="radio-text">新添加:</span>
+					</label>
+					<label class="state">
+					  	<input type="radio" name="state" id="optionsRadios2" value="2" >
+					    	<span class="radio-text">在售:</span>
+					</label>
+					<label class="state">
+					  	<input type="radio" name="state" id="optionsRadios3" value="0" >
+					    	<span class="radio-text">下架:</span>
+					</label>
+				</div>
+			</div>	
+			<div class="control-group">
+				<label class="control-label" for="input01">库存量:</label>
+				<div class="controls">
+					<input type="number" class="input-xlarge goodsnum" id="input01" name="store" />
+					<label class="hidden hid-label" id="storeVerify"></label> 
+
+				</div>
+			</div>					
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">添加</button> <button class="btn reset" type="reset">重置</button>
+			</div>
+		</fieldset>
+	</form>
+	<script type="text/javascript">
+		//正则判断
+		addUsersVerify();
+
+		//单价保留两位小数
+		blTwoXs();
+	</script>
+{% endblock %}

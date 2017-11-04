@@ -1,0 +1,521 @@
+/*base-------------------------------------------------------------------------------*/
+body a:hover,body a:visited ,body a:focus{
+    text-decoration:none;
+    
+}
+.well a:hover{
+    color:#08c;
+}
+.well .nav .nav-header.current{
+        background-color: transparent;
+        border-left: 2px solid #563d7c;
+        color: #563d7c;
+        font-weight: 700;
+        padding-left: 18px;
+}
+.nav-header{
+    padding: 5px 15px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.nav-list  .level {
+    width: 100%;
+    margin-left: -15px;
+    margin-right: -15px;
+    /*display: none;*/
+}
+.nav-list  .level li {
+    width: 100%;
+}
+.nav-list  .level  a {
+    padding: 3px 15px;
+    width: 100%;
+    display: inline-block;
+    text-decoration: none;
+}
+.nav-list .level .active  a, .nav-list .level .active a:hover {
+    background-color: #08c;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+}
+.nav-list .level  a:hover {
+    background-color: #eee;
+    text-decoration: none;
+}
+.icon-white, .nav-pills > .active > a > [class^="icon-"], .nav-pills > .active > a > [class*=" icon-"], .nav-list .level .active > a > [class^="icon-"], .nav-list .level  .active > a > [class*=" icon-"], .navbar-inverse .nav > .active > a > [class^="icon-"], .navbar-inverse .nav > .active > a > [class*=" icon-"], .dropdown-menu > li > a:hover > [class^="icon-"], .dropdown-menu > li > a:hover > [class*=" icon-"], .dropdown-menu > .active > a > [class^="icon-"], .dropdown-menu > .active > a > [class*=" icon-"], .dropdown-submenu:hover > a > [class^="icon-"], .dropdown-submenu:hover > a > [class*=" icon-"] {
+    background-image: url("../img/glyphicons-halflings-white.png");
+}
+/*base E----------------------------------------------------------------------------*/
+
+
+/*users-add------------------------------------------------------------------------*/
+.usersadd .state{
+	width: 13%;
+	float: left;
+	margin: 4px 0;
+}
+.state  input[type="radio"], input[type="checkbox"]{
+	margin-top: -1px;
+}
+.input-xlarge{
+	float: left;
+}
+.controls .hid-label{
+	line-height: 22px;
+	height: 22px;
+	float: left;
+	margin: 0 0 0 5px;
+	text-align: center;
+	padding: 4px 6px;
+}
+.form-actions{
+	background: #fff;
+}
+.usersadd .hid-label{
+    color: #d80000;
+}
+/*users-add E-----------------------------------------------------------------------*/
+
+
+/*users-index -----------------------------------------------------------------------*/
+@font-face {
+  font-family: 'Glyphicons Halflings';
+
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff2') format('woff2'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+.carousel {
+    position: relative;
+}
+.carousel-indicators {
+    bottom: 10px;
+    left: 50%;
+    list-style: outside none none;
+    margin-left: -30%;
+    padding-left: 0;
+    position: absolute;
+    text-align: center;
+    width: 60%;
+    z-index: 15;
+}
+.carousel-indicators li {
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
+    height: 10px;
+    margin: 1px;
+    text-indent: -999px;
+    width: 10px;
+}
+.carousel-indicators .active {
+    background-color: #fff;
+    height: 12px;
+    margin: 0;
+    width: 12px;
+}
+.carousel-inner > .item > a > img, .carousel-inner > .item > img, .img-responsive, .thumbnail a > img, .thumbnail > img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+.carousel-inner {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+.carousel-inner > .item {
+    display: none;
+    position: relative;
+    transition: left 0.6s ease-in-out 0s;
+}
+.carousel-inner > .item > a > img, .carousel-inner > .item > img {
+    line-height: 1;
+}
+.sr-only {
+    border: 0 none;
+    clip: rect(0px, 0px, 0px, 0px);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+.sr-only-focusable:active, .sr-only-focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
+@media not all, (-webkit-transform-3d) {
+	.carousel-inner > .item {
+	    backface-visibility: hidden;
+	    perspective: 1000px;
+	    transition: transform 0.6s ease-in-out 0s;
+	}
+	.carousel-inner > .item.active.right, .carousel-inner > .item.next {
+	    left: 0;
+	    transform: translate3d(100%, 0px, 0px);
+	}
+	.carousel-inner > .item.active.left, .carousel-inner > .item.prev {
+	    left: 0;
+	    transform: translate3d(-100%, 0px, 0px);
+	}
+	.carousel-inner > .item.active, .carousel-inner > .item.next.left, .carousel-inner > .item.prev.right {
+	    left: 0;
+	    transform: translate3d(0px, 0px, 0px);
+	}
+}
+.carousel-inner > .active, .carousel-inner > .next, .carousel-inner > .prev {
+    display: block;
+}
+.carousel-inner > .active {
+    left: 0;
+}
+.carousel-inner > .next, .carousel-inner > .prev {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.carousel-inner > .next {
+    left: 100%;
+}
+.carousel-inner > .prev {
+    left: -100%;
+}
+.carousel-inner > .next.left, .carousel-inner > .prev.right {
+    left: 0;
+}
+.carousel-inner > .active.left {
+    left: -100%;
+}
+.carousel-inner > .active.right {
+    left: 100%;
+}
+.carousel-control {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 15%;
+	font-size: 20px;
+	color: #fff;
+	text-align: center;
+	text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+	background: rgba(0, 0, 0, 0);
+	filter: alpha(opacity=50);
+	opacity: .5;
+	border: none;
+	border-radius: none;
+	font-size: 30px;
+	font-weight: 100;
+	height: auto;
+	line-height: auto;
+	margin: 0;
+}
+.glyphicon-chevron-left:before {
+  content: "\e079";
+}
+.glyphicon-chevron-right:before {
+  content: "\e080";
+}
+.glyphicon {
+    display: inline-block;
+    font-family: "Glyphicons Halflings";
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    position: relative;
+    top: 1px;
+}
+.carousel-control:focus, .carousel-control:hover {
+    color: #fff;
+    opacity: 0.9;
+    outline: 0 none;
+    text-decoration: none;
+}
+.carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right, .carousel-control .icon-next, .carousel-control .icon-prev {
+    display: inline-block;
+    margin-top: -10px;
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+}
+.carousel .active, .carousel .next, .carousel .prev{
+	display: inline-block;;
+}
+.carousel-control:hover,
+.carousel-control:focus {
+  color: #fff;
+  text-decoration: none;
+  filter: alpha(opacity=90);
+  outline: 0;
+  opacity: .9;
+}
+.carousel-control .icon-prev,
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right {
+  position: absolute;
+  top: 50%;
+  z-index: 5;
+  display: inline-block;
+  margin-top: -10px;
+}
+.carousel-control .icon-prev,
+.carousel-control .glyphicon-chevron-left {
+  left: 50%;
+  margin-left: -10px;
+}
+.carousel-control .icon-next,
+.carousel-control .glyphicon-chevron-right {
+  right: 50%;
+  margin-right: -10px;
+}
+.carousel-control .icon-prev,
+.carousel-control .icon-next {
+  width: 20px;
+  height: 20px;
+  font-family: serif;
+  line-height: 1;
+}
+.carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
+    left: 50%;
+    margin-left: -10px;
+}
+.carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
+    margin-right: -10px;
+    right: 50%;
+}
+.carousel-control .icon-next, .carousel-control .icon-prev {
+    font-family: serif;
+    height: 20px;
+    line-height: 1;
+    width: 20px;
+}
+.carousel-control .icon-prev::before {
+    content: "‹";
+}
+.carousel-control .icon-next::before {
+    content: "›";
+}
+.carousel-indicators {
+    bottom: 10px;
+    left: 50%;
+    list-style: outside none none;
+    margin-left: -30%;
+    padding-left: 0;
+    position: absolute;
+    text-align: center;
+    width: 60%;
+    z-index: 15;
+}
+.carousel-indicators li {
+    background-color: rgba(0, 0, 0, 0);
+    border: 1px solid #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    display: inline-block;
+    height: 10px;
+    margin: 1px;
+    text-indent: -999px;
+    width: 10px;
+}
+.carousel-indicators .active {
+    background-color: #fff;
+    height: 12px;
+    margin: 0;
+    width: 12px;
+}
+.carousel-caption {
+    bottom: 20px;
+    color: #fff;
+    left: 15%;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    position: absolute;
+    right: 15%;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    z-index: 10;
+}
+.carousel-caption .btn {
+    text-shadow: none;
+}
+@media screen and (min-width: 768px) {
+	.carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right, .carousel-control .icon-next, .carousel-control .icon-prev {
+	    font-size: 30px;
+	    height: 30px;
+	    margin-top: -10px;
+	    width: 30px;
+	}
+	.carousel-control .glyphicon-chevron-left, .carousel-control .icon-prev {
+	    margin-left: -10px;
+	}
+	.carousel-control .glyphicon-chevron-right, .carousel-control .icon-next {
+	    margin-right: -10px;
+	}
+	.carousel-caption {
+	    left: 20%;
+	    padding-bottom: 30px;
+	    right: 20%;
+	}
+	.carousel-indicators {
+	    bottom: 20px;
+	}
+}
+/*users-base E---------------------------------------------------------------------*/
+
+/*myadmin-login -----------------------------------------------------------------------*/
+.login{
+	background:url(../img/banner-l.png) no-repeat 0 center;
+	height: 750px;
+	width: 1240px;
+	margin: 0 auto;
+	padding: 0;
+             position: relative;
+}
+.login .container{
+	position: absolute;
+	top: 200px;
+	right: 30%;
+	width: 330px;
+}
+.login .well{
+	background-color: #c8f0fb;
+	border: 1px solid #b3eef9;
+}
+.radio, .checkbox{
+	padding-left: 24px;
+}
+.login .btn{
+	width: 25%;
+}
+.login input[name = showcode]{
+	height: 24px;
+	margin-top: 10px;
+	width: 100px;
+}
+.login .well .tit{
+	width: 60px;
+	text-align: right;
+	display: inline-block;
+}
+.login .btn.btn-primary{
+	margin:10px 0 0 40px;
+}
+.login .btn.reset{
+	float: right;
+	margin:10px 40px 0 0;
+}
+.warntext{
+	color:red;
+	padding-top:10px;
+	display:block;
+	text-align: center;
+	
+}
+/*myadmin-login E-----------------------------------------------------------------------*/
+
+/*types-index -----------------------------------------------------------------------------*/
+.table tbody .tytr{
+	display:none;
+}
+/*types-index E --------------------------------------------------------------------------*/
+
+/*types-add --------------------------------------------------------------------------*/
+
+.typesadd .controls select{
+    width: 100px;
+}
+/*types-add E -----------------------------------------------------------------------*/
+
+
+
+/*goods-add------------------------------------------------------------------------*/
+.goodsadd .state{
+    width: 13%;
+    float: left;
+    margin: 4px 0;
+}
+.goodsadd .goodsnum{
+    width: 150px;
+}
+.goodsadd .goodsprice .goodsnum{
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+.goodsprice .pricedw{
+     background-color: #e6e6e6;
+    border-color: #ccc;
+    border-image: none;
+    border-style: solid;
+    border-width: 1px 1px 1px 0;
+    display: inline-block;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    vertical-align: top;
+    width: 28px;
+    font-style:normal;
+    float: left;
+}
+/*goods-add E---------------------------------------------------------------------*/
+
+
+/*goods-edit------------------------------------------------------------------------*/
+.controls #inputpic.input-xlarge{
+	width:70%;
+	position:absolute;
+	left:22px;
+	border:none;
+	box-shadow:none;
+	top:0;
+}
+.controls .showcont{
+	border: 1px solid #d7d7d7;
+    	border-radius: 4px;
+    	display: inline-block;
+    	position:relative;
+    	float:left;
+    	width:200px;
+    	height:30px;
+}
+.form-horizontal .controls.goodspic{
+	margin-left:20px;
+}
+.goodspic{
+    background-color: #fff;
+    display: inline-block;
+    padding-left: 0;
+    position: relative;
+    vertical-align: top;
+    z-index: 1;
+}
+.controls span.show {
+    height: 22px;
+    left: 0;
+    text-align: center;
+    top: 0;
+    width: 22px;
+    z-index: 2;
+}
+.controls span.show a {
+    color: #aaa;
+    display: block;
+    height: 22px;
+    width: 22px;
+}
+.goodspic span.show i {
+    display: block;
+    font-size: 14px;
+    line-height: 22px;
+    margin-top:5px;
+}
+/*goods-edit E---------------------------------------------------------------------*/
+

@@ -1,0 +1,942 @@
+/*公共*/
+.orderadd{
+	background-color: #f5f5f5;
+}
+/*公共 E*/
+
+/*面包屑*/
+.breadcrumb {
+	background-color: #fff;
+	border-radius: 4px;
+	list-style: outside none none;
+	padding: 0 0 0 30px;
+	margin: 0;
+	line-height:74px;
+}
+.breadcrumb > li + li::before{
+	content: ">";
+}
+.breadcrumb a{
+	color: #666
+}
+.breadcrumb>.active {
+	color: #00c3f5;
+}
+/*面包屑 E*/
+
+/*主内容*/
+/*收货人信息*/
+.order-address .order-address-triangle,.order-address .order-address-triangle:after {
+	width:0;
+	height:0;
+	border-left:8px solid transparent;
+	border-right:8px solid transparent
+}
+.mz-captcha-open .mz-btn {
+	float:right
+}
+.order-address {
+	position:relative;
+	padding:0 40px 10px;
+	margin:10px 0;
+	background-color:#FFF
+}
+.order-address .order-address-triangle {
+	position:relative;
+	border-top:6px solid #999;
+	transition:border-color .8s
+}
+.order-address .order-address-triangle:after {
+	content:'';
+	position:absolute;
+	top:-8px;
+	left:-8px;
+	border-top:6px solid #fff
+}
+.order-address .order-address-title {
+	padding:20px 0;
+	text-indent:10px;
+	font-size:18px;
+	font-weight:bolder;
+	border-bottom:1px solid #EFEFEF
+}
+.order-address .order-address-title-tips {
+	display:none;
+	vertical-align:middle;
+	font-size:12px;
+	margin-left:20px;
+	background-color:#e6f9fe;
+	border:1px solid #00c3f5;
+	padding:5px 10px;
+	color:#00c3f5;
+	text-indent:0;
+	font-weight:400
+}
+.order-address .order-address-title-tips .order-address-tips-icon {
+	display:inline-block;
+	font-style:normal;
+	text-align:center;
+	line-height:14px;
+	border-radius:100%;
+	background-color:#00c3f5;
+	width:14px;
+	height:14px;
+	margin-right:5px;
+	color:#fff
+}
+.order-address .order-address-checkbox.checked .order-address-checkbox-checked,.order-address .order-address-checkbox.disabled:hover .order-address-checkbox-tips {
+	display:block
+}
+.order-address .order-address-checkbox,.order-address .order-address-checkbox.disabled:hover {
+	padding:1px 16px;
+	border:1px solid #EFEFEF
+}
+.order-address .order-address-title-tips .order-address-tips-icon:after {
+	content:'!'
+}
+.order-address .order-address-list {
+	margin-top:30px;
+	overflow:hidden;
+	height:174px;
+	transition:height .8s
+}
+.order-address .order-address-checkbox {
+	float:left;
+	position:relative;
+	width:275px;
+	height:144px;
+	cursor:pointer;
+	margin:0 0 30px 12px;
+	transition:border-color .8s
+}
+.order-address .order-address-checkbox .order-address-checkbox-delete,.order-address .order-address-checkbox .order-address-checkbox-edit {
+	margin-right:10px;
+	float:right
+}
+.order-address .order-address-checkbox.disabled {
+	background-color:#f5f5f5
+}
+.order-address .order-address-checkbox.checked,.order-address .order-address-checkbox:hover {
+	padding:0 15px;
+	border:2px solid #00c3f5
+}
+.order-address .order-address-checkbox:hover .order-address-checkbox-ctrl {
+	opacity:1;
+	filter:alpha(opacity=100)
+}
+.order-address .order-address-checkbox:hover .order-address-add-icon {
+	background-color:#00c3f5
+}
+.order-address .order-address-checkbox:hover .order-address-add-text {
+	color:#00c3f5
+}
+.address-adder .address-adder-content {
+	padding: 30px;
+	word-break: break-all;
+}
+.address-adder .address-adder-row {
+	line-height:36px;
+	margin-bottom:24px
+}
+.address-adder .address-adder-title {
+	float:left;
+	min-width:77px;
+	margin-right:10px;
+	color:#666
+}
+.address-adder .mz-input-warp {
+	float:left
+}
+.address-adder .address-adder-must {
+	color:#00c3f5
+}
+.address-adder .address-adder-name {
+	width:158px;
+	margin-right:30px
+}
+.address-adder .mz-selectmenu {
+	width:103px
+}
+.address-adder .mz-address .mz-address-other {
+	position:absolute;
+	bottom:-60px;
+	left:0;
+	width:490px;
+	height:38px
+}
+.address-adder .mz-address .mz-address-other .mz-input {
+	height:36px
+}
+.address-adder .address-adder-detail {
+	width:490px
+}
+.address-adder .address-adder-other {
+	display:none
+}
+/*收货人信息 E*/
+
+/*购物清单信息列表*/
+.order-product {
+	padding:0 40px 30px;
+	background-color:#FFF
+}
+.order-product .order-product-module {
+	margin-bottom:30px
+}
+.order-product .order-product-module:last-child {
+	margin-bottom:0
+}
+.order-product .order-product-title {
+	font-size:18px;
+	text-indent:10px;
+	padding:25px 0;
+	font-weight:bolder
+}
+.order-product .order-product-table-name {
+	width:438px;
+	text-align:center
+}
+.order-product .order-product-table-price {
+	text-align:center;
+	width:228px
+}
+.order-product .order-product-table-num {
+	text-align:center;
+	width:140px
+}
+.order-product .order-product-table-total {
+	text-align:center;
+	width:160px;
+	font-weight:bold;
+	font-size: 16px;
+}
+.order-product .order-product-table-express {
+	text-align:center;
+	width:192px;
+	line-height:25px
+}
+.order-product .order-product-table-express .order-font.presale {
+	vertical-align:middle;
+	color:#00c3f5;
+	font-size:30px
+}
+.order-product .order-product-table-express .order-product-presale-desc {
+	color:#999
+}
+.order-product table {
+	border:1px solid #EFEFEF
+}
+.order-product thead {
+	font-size:18px;
+	border-bottom:1px solid #EFEFEF
+}
+.order-product thead tr {
+	height:62px
+}
+.order-product tbody tr {
+	height:150px;
+	border-top:1px solid #EFEFEF
+}
+.order-product tbody .order-product-table-express {
+	border-left:1px solid #EFEFEF;
+	color:#666
+}
+.order-product tbody .order-product-table-price {
+	text-align:center
+}
+.order-product tfoot {
+	border-top:1px solid #EFEFEF;
+	color:#666;
+	vertical-align:top
+}
+.order-product tfoot tr {
+	height:108px;
+	background-color:#f5f5f5
+}
+.order-product .order-product-table-child {
+	border-top:0;
+	height:120px
+}
+.order-product .order-product-table-child.first {
+	border-top:1px dashed #EFEFEF
+}
+.order-product .order-product-table-child td:first-child {
+	position:relative
+}
+.order-product .order-product-table-child td:first-child:after,.order-product .order-product-table-child td:first-child:before {
+	position:absolute;
+	display:block;
+	content:"";
+	top:-1px;
+	height:2px;
+	width:40px;
+	background-color:#fff
+}
+.order-product .order-product-table-child td:first-child:before {
+	left:0
+}
+.order-product .order-product-table-child td:first-child:after {
+	right:0
+}
+.order-product .order-product-table-child .order-product-name {
+	width:auto
+}
+.order-product .order-product-table-child .order-product-image {
+	width:80px;
+	height:80px;
+	margin:0 40px
+}
+.order-product .order-product-group {
+	color:#00c3f5
+}
+.order-product .order-product-image {
+	vertical-align:middle;
+	height:102px;
+	width:102px;
+	margin-left:18px;
+	margin-right:10px
+}
+.order-product .order-product-name {
+	display:inline-block;
+	vertical-align:middle;
+	font-size:16px;
+	padding-top:20px;
+}
+.order-product .order-product-name-item {
+	max-width:290px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+
+}
+.order-product .order-product-link {
+	color:#666;
+	line-height:22px;
+
+}
+.order-product .order-product-price {
+	font-weight:bolder;
+	font-size:16px
+}
+.order-product .order-product-price:before {
+	margin-right:2px
+}
+
+.order-product .order-product-price.red {
+	color:#e02b41
+}
+.order-product .order-product-price.cancel {
+	font-size:14px;
+	color:#b6b6b6;
+	text-decoration:line-through
+}
+.order-product .order-product-price.cancel:before {
+	margin-right:0
+}
+.order-product .order-product-discount {
+	position:relative;
+	display:inline-block;
+	vertical-align:middle;
+	height:32px;
+	margin-top:2px;
+	font-size:12px;
+	cursor:pointer
+}
+.order-product .order-product-discount.more:hover .order-product-discount-title {
+	border-bottom:0;
+	border-radius:4px 4px 0 0
+}
+.order-product .order-product-discount.more:hover .order-product-discount-title .order-product-discount-triangle:after {
+	border-top:0;
+	border-bottom:4px solid #e02b41
+}
+.order-product .order-product-discount.more:hover .order-product-discount-downmenu {
+	display:block
+}
+.order-product .order-product-discount .order-product-price {
+	font-size:12px;
+	margin-left:0
+}
+.order-product .order-product-discount .order-product-discount-title {
+	position:relative;
+	display:inline-block;
+	padding:6px;
+	background-color:#ffedf0;
+	border-radius:4px;
+	border:1px solid #e02b41;
+	z-index:2;
+	color:#e02b41
+}
+.order-product .order-product-discount .order-product-discount-triangle {
+	position:relative;
+	display:inline-block;
+	vertical-align:middle;
+	width:8px;
+	margin-left:6px
+}
+.order-product .order-product-discount .order-product-discount-triangle:after {
+	position:absolute;
+	left:0;
+	top:-3px;
+	content:'';
+	width:0;
+	height:0;
+	transition:all .3s;
+	border-left:4px solid transparent;
+	border-top:4px solid #e02b41;
+	border-bottom:0;
+	border-right:4px solid transparent
+}
+.order-product .order-product-discount .order-product-discount-downmenu {
+	display:none;
+	position:absolute;
+	left:0;
+	top:28px;
+	width:auto;
+	background-color:#ffedf0;
+	border-radius:0 4px 4px;
+	border:1px solid #e02b41;
+	z-index:1;
+	padding-top:8px;
+	color:#666;
+	text-align:left
+}
+.order-product .order-product-discount .order-product-discount-downmenu .order-product-discount-item {
+	padding:0 6px 6px;
+	white-space:nowrap
+}
+
+.order-product .order-product-supplier {
+	position:relative;
+	font-weight:400;
+	color:#666;
+	font-size:12px;
+	margin-left:10px;
+	cursor:pointer
+}
+.order-product .order-product-supplier:hover .order-product-supplier-tips {
+	display:inline-block
+}
+.order-product .order-product-supplier .order-product-supplier-name {
+	color:#333
+}
+.order-product .order-product-supplier .order-product-supplier-tips {
+	display:none;
+	position:absolute;
+	vertical-align:middle;
+	padding:4px 6px;
+	background-color:#eee;
+	border:1px solid #EFEFEF;
+	margin-left:10px;
+	margin-top:-5px
+}
+.order-product .order-product-supplier .order-product-supplier-tips:after,.order-product .order-product-supplier .order-product-supplier-tips:before {
+	position:absolute;
+	width:0;
+	height:0;
+	top:4px;
+	border-top:8px solid transparent;
+	border-bottom:8px solid transparent;
+	content:''
+}
+.order-product .order-product-supplier .order-product-supplier-tips:before {
+	left:-8px;
+	border-right:8px solid #EFEFEF
+}
+.order-product .order-product-supplier .order-product-supplier-tips:after {
+	left:-6px;
+	border-right:8px solid #eee
+}
+.order-product .order-product-arrival-icon {
+	display:inline-block;
+	vertical-align:text-bottom;
+	position:relative;
+	width:20px;
+	height:20px;
+	border-radius:4px;
+	background-color:#00c3f5;
+	margin-right:5px
+}
+.order-product .order-product-total {
+	float:right;
+	margin:40px 20px 0 0;
+	font-size:16px;
+	font-weight:bolder
+}
+.order-product .order-product-total .order-product-price {
+	font-size:22px
+}
+.order-product-table-id{
+	text-align: center;
+}
+/*购物清单信息列表 E*/
+
+
+/*底部结算信息*/
+.order-total .order-total-pay-header {
+	color:#333;
+	font-size:18px;
+	text-indent:10px;
+	padding:25px 0;
+	font-weight:bolder;
+	border-bottom: 1px solid #efefef;
+}
+.order-total {
+	overflow:hidden;
+	margin:10px auto 38px;
+	padding:0 40px 30px;
+	color:#898989;
+	background-color:#FFF
+}
+.order-total .order-total-content {
+	float:right;
+	width:318px;
+	margin-top:30px;
+}
+.order-total .order-total-row {
+	padding:0 2px;
+	margin-bottom:20px
+}
+.order-total .order-total-row.order-total-valid-row {
+	font-size:0;
+	margin-bottom:5px;
+	padding-right:0
+}
+.order-total .order-total-row.order-total-row-tips {
+	height:20px;
+	color:#e02b41;
+	font-size:12px
+}
+.order-total .order-total-line {
+	width:100%;
+	height:1px;
+	background-color:#EFEFEF;
+	margin-bottom:20px
+}
+.order-total .order-total-row #submitForm{
+	float:right;
+}
+.order-total .order-total-price.total {
+	color:#e02b41;
+	font-size:20px;
+	font-weight:bolder
+}
+.order-total .order-total-price{
+	float: right;
+}
+/*底部结算信息 E*/
+
+/*主内容 E*/
+
+
+/*支付页面*/
+.payment-body {
+    background-color: #fff;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    overflow: hidden;
+}
+.payment-info .payment-success {
+    color: #00c3f5;
+    float: left;
+    font-size: 60px;
+    margin-left: 40px;
+    margin-top: 35px;
+}
+.payment-info-content {
+    color: #666;
+    float: left;
+    margin: 40px 0 50px 40px;
+    width: 1030px;
+}
+.payment-info-content .payment-info-btn {
+    color: #00c3f5;
+    cursor: pointer;
+    margin: 0 5px;
+}
+.payment-info-content .payment-info-btn::before {
+    content: "[";
+    margin-right: 2px;
+}
+.payment-info-content .payment-info-btn::after {
+    content: "]";
+    margin-left: 2px;
+}
+.payment-info-content .payment-info-title {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+.payment-info-content .payment-info-total {
+    color: #e02b41;
+    font-weight: bolder;
+}
+.payment-info-content .payment-info-time {
+    color: #e02b41;
+}
+.payment-info-content .payment-info-tips {
+    color: #e02b41;
+    margin-bottom: 5px;
+}
+.payment-info-content .payment-info-desc {
+    margin-bottom: 20px;
+}
+.payment-info-content .payment-info-bottom {
+    border-top: 1px solid #efefef;
+    padding-top: 20px;
+}
+.payment-info-content .payment-info-row {
+    margin-bottom: 5px;
+}
+.payment-info-content .payment-info-label {
+    color: #999;
+}
+.payment-info-content .payment-info-product {
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: bottom;
+    white-space: nowrap;
+    width: 980px;
+    word-break: keep-all;
+}
+.mz-btn {
+    -moz-user-select: none;
+    border-radius: 4px;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 34px;
+    min-height: 34px;
+    min-width: 58px;
+    outline: 0 none;
+    padding: 0 20px;
+    text-align: center;
+    transition: all 0.5s ease 0s;
+    vertical-align: middle;
+}
+.mz-btn.s, .mz-btn.xs {
+    min-width: 48px;
+}
+.mz-btn.primary {
+    background-color: #fff;
+    border-color: #00c3f5;
+    color: #00c3f5;
+}
+.mz-btn.primary:hover {
+    border-color: #40d2f8;
+    color: #40d2f8;
+}
+.mz-btn.primary:active {
+    border-color: #08aee2;
+    color: #08aee2;
+}
+.mz-btn.success {
+    background-color: #00c3f5;
+    border-color: #00c3f5;
+    color: #fff;
+}
+.mz-btn.success:hover {
+    background-color: #40d2f8;
+    border-color: #40d2f8;
+}
+.mz-btn.success:active {
+    background-color: #08aee2;
+    border-color: #08aee2;
+}
+.mz-btn.warning {
+    background-color: #f66567;
+    border-color: #f66567;
+    color: #fff;
+}
+.mz-btn.warning:hover {
+    background-color: #ff8284;
+    border-color: #ff8284;
+}
+.mz-btn.warning:active {
+    background-color: #da5658;
+    border-color: #da5658;
+}
+.mz-btn.cancel {
+    background-color: #efefef;
+    border-color: #efefef;
+    color: #999;
+}
+.mz-btn.cancel:hover {
+    background-color: #f6f6f6;
+    border-color: #f6f6f6;
+}
+.mz-btn.cancel:active {
+    background-color: #dfdfdf;
+    border-color: #dfdfdf;
+}
+.mz-btn.link {
+    background-color: #fff;
+    border-color: transparent;
+    color: #999;
+}
+.mz-btn.link:hover {
+    border-color: #bdbdbd;
+}
+.mz-btn.disabled, .mz-btn[disabled] {
+    background-color: #dbdbdb;
+    border-color: #dbdbdb;
+    color: #fff;
+    cursor: no-drop;
+}
+.mz-btn.xs {
+    line-height: 22px;
+    min-height: 22px;
+    padding: 0 10px;
+}
+.mz-btn.m, .mz-btn.s {
+    line-height: 34px;
+    min-height: 34px;
+    padding: 0 20px;
+}
+.mz-btn.m {
+    min-width: 58px;
+}
+.mz-btn.l {
+    line-height: 34px;
+    min-height: 34px;
+    min-width: 56px;
+    padding: 0 36px;
+}
+.mz-btn.xl {
+    line-height: 44px;
+    min-height: 44px;
+    min-width: 70px;
+    padding: 0 44px;
+}
+.payment-tools {
+    margin: 0 30px 50px;
+    overflow: hidden;
+}
+.payment-tools .payment-tools-img {
+    border: 1px solid #bdbdbd;
+    display: inline-block;
+    height: 38px;
+    vertical-align: middle;
+    width: 125px;
+}
+.mz-tab {
+    position: relative;
+}
+
+.mz-tab .mz-tab-handler {
+	background-color: #fff;
+	border: 1px solid #efefef;
+	cursor: pointer;
+	float: left;
+	font-size: 16px;
+	height: 59px;
+	line-height: 59px;
+	position: relative;
+	text-align: center;
+	transition: color 0.5s ease 0s;
+	width: 155px;
+	z-index: 2;
+}
+.mz-tab .mz-tab-handler a{
+	background-color: #fff;
+	cursor: pointer;
+	font-size: 16px;
+	height: 57px;
+	line-height: 59px;
+	text-align: center;
+	width: 153px;
+
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover{
+	background-color: #fff;
+	border: none;
+}
+.mz-tab .mz-tab-handler:hover {
+	color: #00c3f5;
+}
+.mz-tab .mz-tab-handler.active {
+	border-bottom: 0 none;
+	border-top-color: #00c3f5;
+	color: #00c3f5;
+}
+.mz-tab .mz-tab-panels {
+	position: relative;
+	top: -2px;
+}
+.mz-tab .mz-tab-panel {
+	background-color: #fff;
+	border: 1px solid #efefef;
+	display: none;
+	min-height: 320px;
+}
+.mz-tab .mz-tab-panel.active, .mz-tab-panel.banks .payment-tools-label.active .payment-tools-radio::after {
+    display: block;
+}
+.mz-tab .payment-tools-submit {
+	bottom: 40px;
+	position: absolute;
+	right: 40px;
+}
+
+.mz-tab-panel.banks .payment-tools-label {
+	cursor: pointer;
+	float: left;
+	margin-left: 40px;
+	margin-top: 30px;
+}
+.mz-tab-panel.banks .payment-tools-radio {
+	border: 1px solid #e0e0e0;
+	border-radius: 100%;
+	display: inline-block;
+	height: 14px;
+	margin-right: 20px;
+	position: relative;
+	vertical-align: middle;
+	width: 14px;
+}
+.payment-tools-banks-detail {
+    border: 1px solid #efefef;
+    margin: 30px 0 120px 60px;
+    text-align: center;
+    vertical-align: middle;
+}
+.payment-tools-banks-detail thead {
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #efefef;
+    line-height: 42px;
+}
+.payment-tools-banks-detail tbody {
+    background-color: #fafafa;
+    line-height: 24px;
+}
+.payment-tools-banks-detail .quota {
+    padding: 10px;
+    text-align: left;
+}
+.payment-tools-alipay {
+    height: 360px;
+    position: relative;
+}
+.payment-tools-alipay .alipay-code-frame {
+    border: 0 none;
+    height: 300px;
+    left: 290px;
+    overflow: hidden;
+    position: absolute;
+    top: 50px;
+    width: 700px;
+}
+.mz-tab-panel.huabei .payment-tools-label {
+    float: left;
+    margin: 40px 30px 0;
+}
+.mz-tab-panel.huabei .payment-tools-huabei-choose {
+    background-color: #fff;
+    border: 1px solid #efefef;
+    border-radius: 4px;
+    color: #999;
+    cursor: pointer;
+    float: left;
+    font-size: 12px;
+    height: 58px;
+    margin-right: 15px;
+    margin-top: 30px;
+    text-align: center;
+    transition: all 0.3s ease 0s;
+    width: 158px;
+}
+.mz-tab-panel.huabei .payment-tools-huabei-choose.active, .mz-tab-panel.huabei .payment-tools-huabei-choose:hover {
+    border-color: #00c3f5;
+    color: #00c3f5;
+}
+.mz-tab-panel.huabei .payment-tools-huabei-choose.active .payment-tools-huabei-top, .mz-tab-panel.huabei .payment-tools-huabei-choose:hover .payment-tools-huabei-top {
+    color: #00c3f5;
+}
+.mz-tab-panel.huabei .payment-tools-huabei-top {
+    color: #333;
+    font-size: 16px;
+    font-weight: bolder;
+    margin-bottom: 2px;
+    margin-top: 8px;
+    transition: all 0.3s ease 0s;
+}
+.mz-tab-panel.alipay .payment-tools-alipay-left {
+    float: left;
+    margin: 40px 0;
+    position: relative;
+    width: 588px;
+}
+.mz-tab-panel.alipay .payment-tools-alipay-right {
+    float: left;
+    margin-top: 40px;
+    width: 589px;
+}
+.mz-tab-panel.alipay .payment-tools-alipay-title {
+    font-size: 20px;
+    margin-top: 2px;
+    text-align: center;
+}
+.mz-tab-panel.alipay .payment-tools-alipay-qrcode {
+    height: 230px;
+    margin: 20px auto;
+    overflow: hidden;
+    position: relative;
+    width: 230px;
+}
+.mz-tab-panel.alipay .payment-tools-alipay-iframe {
+    height: 450px;
+    left: -58px;
+    position: absolute;
+    top: -19px;
+    width: 750px;
+}
+.mz-tab-panel.alipay .payment-tools-alipay-web {
+    text-align: center;
+}
+.mz-tab-panel.alipay .payment-tools-alipay-web .order-font {
+    color: #666;
+    font-size: 114px;
+}
+.mz-tab-panel.alipay .payment-tools-alipay-icon {
+    margin: 40px 0;
+}
+.mz-tab-panel.wechat .payment-tools-wechat-qrcode {
+    float: left;
+    height: 230px;
+    margin: 60px 70px 40px 280px;
+    position: relative;
+    width: 230px;
+}
+.mz-tab-panel.wechat .payment-tools-wechat-container {
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+.mz-tab-panel .payment-tools-alipay-qrcode {
+    height: 234px;
+    margin: 0 auto;
+    position: relative;
+    width: 230px;
+}
+.mz-tab-panel .payment-tools-alipay-qrcode img{
+	width: 100%;
+	height: 100%;
+}
+.payment-tools-alipay-web {
+    float: left;
+    position: relative;
+    width: 589px;
+    min-height:320px;
+}
+.payment-tools-submit {
+    bottom: 40px;
+    position: absolute;
+    right: 40px;
+}
+.payment-tools-alipay-yh{
+	padding:40px 0;
+}
+/*支付页面E*/

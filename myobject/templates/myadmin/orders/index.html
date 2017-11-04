@@ -1,0 +1,131 @@
+{% extends "myadmin/base.html" %}
+
+{% block mainbody %}	
+{% load static from staticfiles %}
+<!-- <script src="{% static 'myadmin/js/users.js' %}"></script>	 -->
+		
+	<h4>
+		订单信息管理
+	</h4>
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>
+					订单号
+				</th>
+				<th>
+					会员账户
+				</th>
+				<th>
+					地址
+				</th>
+				<th>
+					下单时间
+				</th>
+				<th>
+					订单总金额
+				</th>
+				<th>
+					状态
+				</th>
+				<th>
+					操作
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for orders in orderslists %}
+			<tr>
+				<td>
+					{{orders.id}}
+				</td>
+				{% for user in userslist%}
+				{% if user.id == orders.uid%}
+				<td>
+					{{user.username}}
+				</td>
+				{% endif %}
+				{% endfor %}
+				<td>
+					{{orders.address}}
+				</td>
+				<td>
+					{{orders.addtime}}
+				</td>
+				<td>
+					{{orders.total}}
+				</td>
+				<td>
+					{% if orders.status == 0%}
+						新订单
+					{% elif orders.status == 1%}
+						已发货
+					{% elif orders.status == 2%}
+						已收货
+					{% else%}
+						无效订单
+					{% endif%}
+				</td>
+				<td>
+					<a href="{% url 'myadmin_detailshow' orders.id%}"><button type="button" class="btn btn-info">查看详情</button></a>
+				</td>
+			</tr>
+			{%endfor%}
+		</tbody>
+	</table>
+	<!-- 分页 -->
+	<div class="pagination">
+		<nav aria-label="Page navigation">
+		<ul class="pagination">
+			<li class="disabled">
+				<a href="#">&laquo;</a>
+			</li>
+			<!-- 全部订单展示 -->
+			{% if pIndexi%}
+				{% for pIndexi in plist %}
+				<li>
+					<a href="{% url 'myadmin_ordersindex' pIndexi%}">{{pIndexi}}</a>
+				</li>
+				{% endfor%}
+			<!-- 新添加订单展示 -->
+			{% elif pIndexn%}
+				{% for pIndexn in plist %}
+				<li>
+					<a href="{% url 'myadmin_ordernew' pIndexn%}">{{pIndexn}}</a>
+				</li>
+				{%endfor%}
+			<!-- 已发货订单展示 -->
+			{% elif pIndexo%}
+				{% for pIndexo in plist %}
+				<li>
+					<a href="{% url 'myadmin_orderoff' pIndexo%}">{{pIndexo}}</a>
+				</li>
+				{%endfor%}
+			<!-- 已收货订单展示 -->
+			{% elif pIndexr%}
+				{% for pIndexr in plist %}
+				<li>
+					<a href="{% url 'myadmin_orderreceive' pIndexr%}">{{pIndexr}}</a>
+				</li>
+				{%endfor%}
+			{% endif%}
+			
+			
+			<li>
+				<a href="#">&raquo;</a>
+			</li>
+		</ul>
+		</nav>
+	</div>
+	<h4>{{info}}</h4>
+	<script type="text/javascript">
+		//删除提示弹框
+	            function doDel(u){
+	                if(confirm("确定要删除吗?")){
+	                    window.location=u;
+	                }
+	            }
+	            
+            			
+	</script>
+{% endblock %}

@@ -1,0 +1,481 @@
+{% extends "myweb/base.html" %}
+{% load static from staticfiles %}
+
+{#追加当前页的css样式#}
+{%block mylink%}
+  <link rel="stylesheet" type="text/css" href="{% static 'myweb/css/order.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'myweb/css/order-app.css' %}">
+{%endblock%}
+
+{# 加载主体内容 #}
+{%block content%}
+<style type="text/css">
+
+</style>
+<!-- 主内容区域 -->
+<div class="mainbody order order-app">
+	<div class="container">
+		<!-- 面包屑导航 -->
+		<div class="crumbs col-xs-12 col-sm-12">
+			<ol class="breadcrumb">
+				<li class="hidden-xs hidden-sm"><a href="{% url 'index'%}">首页</a></li>
+				<li class="hidden-xs hidden-sm"><a href="{% url 'member' %}">我的商城</a></li>
+				<li class="active"><a href="{% url 'order' %}">我的订单</a></li>
+			</ol>
+		</div><!-- 面包屑导航 E-->
+		
+		<div class="main clearfix">
+			<!-- 左侧导航 -->
+			{% include 'myweb/menu.html'%}
+			<!-- 左侧导航 E-->
+			<!-- 右侧内容展示 -->
+			<div class="right-content f-fr col-md-8 col-xs-12 col-sm-12">
+				<div class="order-main">
+					<ul class="nav-tabs type-tab-btn clearfix hidden-xs hidden-sm" role="tablist-2">
+						<li role="presentation" class="active">
+							<a href="#order1" aria-controls="order1" role="tab" data-toggle="tab" class="allOrder  col-20">全部订单 </a><i class="line hidden-xs hidden-sm">|</i>
+						</li>
+						<li role="presentation">
+							<a href="#order2" aria-controls="order2" role="tab" data-toggle="tab" class="waitPay col-20">待发货<span class="amount _actAmount"></span></a><i class="line hidden-xs hidden-sm">|</i>
+						</li>
+						<li role="presentation">
+							<a href="#order3" aria-controls="order3" role="tab" data-toggle="tab" class="waitDeliver col-20">已发货</a><i class="line hidden-xs hidden-sm">|</i>
+						</li>
+						<li role="presentation">
+							<a href="#order4" aria-controls="order4" role="tab" data-toggle="tab" class="hasDeliver col-20">已收货</a><i class="line hidden-xs hidden-sm">|</i>
+						</li>
+						<li role="presentation">
+							<a href="#order5" aria-controls="order5" role="tab" data-toggle="tab" class="other col-20">其他</a>
+						</li>
+					</ul>
+					<div class="list-head hidden-xs hidden-sm">
+						<ul class="clearfix">
+							<li class="w50">
+								<select id="checkType" class="check-type">
+									<option value="0">近三个月的订单</option>
+									<option value="1">全部订单</option>
+								</select>
+							订单明细
+							</li>
+							<li class="w125">金额</li>
+							<li class="w125">状态</li>
+							<li class="w125">操作</li>
+						</ul>
+					</div>
+					<div id="tableList{{order.id}}" class="type-contain ui-load-container tab-content">
+						<!-- 全部订单 -->
+						<div role="tabpanel" class="tab-pane active clearfix ui-load-content" id="order1">
+							{% for order in orderlist%}
+							<table class="orderItem">
+								<tbody>
+									<tr class="trHead hidden-xs hidden-sm">
+										<td colspan="4" class="title clearfix">
+										<div class="f-fl">下单时间：
+										<span class="time">{{order.addtime}}</span>
+										订单ID：
+										<span class="orderNumber">{{order.id}}</span>
+										</div>
+										</td>
+									</tr>
+									<tr class="list-box b-l b-r b-b hiddens">
+										<td class="list b-r j-iamCart">
+											<div class="cart-wrap j-CartWrap">
+												<div class="shop j-shop j-amLight">
+													{% for detail in detaillist%}
+													{% if detail.orderid == order.id%}
+													<div class="item b-t clearfix j-item j-iamMain">
+														{% for good in goodslist%}
+														{% if good.id == detail.goodsid%}
+														<a class="productDetail nameWidth col-xs-4 col-sm-4" href="{% url 'detail' good.id%}" target="_blank">
+														<img src="/static/loadimg/l_md_{{ good.picname }}" class="f-fl">
+														</a>
+														<div class="describe f-fl col-xs-8 col-sm-8">
+														<div class="vertic clearfix">
+														<span class="clearfix">
+														<a class="productDetail nameWidth" href="{% url 'detail' good.id%}" target="_blank">
+														<i>{{detail.name}}</i></a>
+														{% endif%}
+														{% endfor%}
+														<p>
+														{{detail.price}}×{{detail.num}}
+														</p>
+														</span>
+														</div>
+														</div>
+														
+													</div>
+													{% endif%}
+													{% endfor %}
+												</div>
+											</div>
+										</td>
+										<td class="b-r w125 center price b-t hidden-xs hidden-sm" rowspan="3">
+											<div class="priceDiv">
+											{{order.total}}
+
+											</div>
+										</td>
+										<td class="b-r w125 center state b-t hidden-xs hidden-sm">
+											<div class="stateDiv">
+											<div>
+											{% if order.status == 0%}
+											新订单
+											{% elif order.status == 1%}
+											已发货
+											{% elif order.status == 2%}
+											已收货
+											{% elif order.status == 3%}
+											无效订单
+											{%endif%}
+											<br></div>
+
+											</div>
+										</td>
+										<td class="w125 center opreat b-t hidden-xs hidden-sm">
+											<ul>
+											<li class="more"><a href="{% url 'orderdetail' order.id%}" target="_blank">查看详情</a></li>
+											</ul>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							{% endfor %}
+						</div><!-- 全部订单E -->
+						<!-- 待发货/新订单 -->
+						<div role="tabpanel" class="tab-pane clearfix ui-load-content" id="order2">
+							{% for order in orderlist%}
+							{% if order.status == 0%}
+							<table class="orderItem">
+								<tbody>
+									<tr class="trHead hidden-xs hidden-sm">
+										<td colspan="4" class="title clearfix">
+										<div class="f-fl">下单时间：
+										<span class="time">{{order.addtime}}</span>
+										订单ID：
+										<span class="orderNumber">{{order.id}}</span>
+										</div>
+										</td>
+									</tr>
+									<tr class="list-box b-l b-r b-b hiddens">
+										<td class="list b-r j-iamCart">
+											<div class="cart-wrap j-CartWrap">
+												<div class="shop j-shop j-amLight">
+													{% for detail in detaillist%}
+													{% if detail.orderid == order.id%}
+													<div class="item b-t clearfix j-item j-iamMain">
+														{% for good in goodslist%}
+														{% if good.id == detail.goodsid%}
+														<a class="productDetail nameWidth col-xs-4 col-sm-4" href="{% url 'detail' good.id%}" target="_blank">
+														<img src="/static/loadimg/l_md_{{ good.picname }}" class="f-fl">
+														</a>
+														<div class="describe f-fl col-xs-8 col-sm-8">
+														<div class="vertic clearfix">
+														<span class="clearfix">
+														<a class="productDetail nameWidth" href="{% url 'detail' good.id%}" target="_blank">
+														<i>{{detail.name}}</i></a>
+														{% endif%}
+														{% endfor%}
+														<p onum="{{detail.num}}" class="denum">
+														{{detail.price}}×{{detail.num}}
+														</p>
+														</span>
+														</div>
+														</div>
+														
+													</div>
+													{% endif%}
+													{% endfor %}
+												</div>
+											</div>
+										</td>
+										<td class="b-r w125 center price b-t hidden-xs hidden-sm" rowspan="3">
+											<div class="priceDiv">
+											{{order.total}}
+
+											</div>
+										</td>
+										<td class="b-r w125 center state b-t hidden-xs hidden-sm">
+											<div class="stateDiv" >
+											<div>
+											{% if order.status == 0%}
+											新订单
+											{% elif order.status == 1%}
+											已发货
+											{% elif order.status == 2%}
+											已收货
+											{% elif order.status == 3%}
+											无效订单
+											{%endif%}
+											<br></div>
+
+											</div>
+										</td>
+										<td class="w125 center opreat b-t hidden-xs hidden-sm">
+											<ul>
+											<li class="more"><a href="{% url 'orderdetail' order.id%}" target="_blank">查看详情</a></li>
+											<li class="more"><button  id="O_cancel" class="btn btn-warning " style="display:inline-block;">取消订单</button></li>
+											</ul>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							{% endif %}
+							{% endfor%}
+						</div><!-- 待发货/新订单E -->
+						<!-- 已发货订单 -->
+						<div role="tabpanel" class="tab-pane clearfix ui-load-content" id="order3">
+							{% for order in orderlist%}
+							{% if order.status == 1%}
+							<table class="orderItem">
+								<tbody>
+									<tr class="trHead hidden-xs hidden-sm">
+										<td colspan="4" class="title clearfix">
+										<div class="f-fl">下单时间：
+										<span class="time">{{order.addtime}}</span>
+										订单ID：
+										<span class="orderNumber">{{order.id}}</span>
+										</div>
+										</td>
+									</tr>
+									<tr class="list-box b-l b-r b-b hiddens">
+										<td class="list b-r j-iamCart">
+											<div class="cart-wrap j-CartWrap">
+												<div class="shop j-shop j-amLight">
+													{% for detail in detaillist%}
+													{% if detail.orderid == order.id%}
+													<div class="item b-t clearfix j-item j-iamMain">
+														{% for good in goodslist%}
+														{% if good.id == detail.goodsid%}
+														<a class="productDetail nameWidth col-xs-4 col-sm-4" href="{% url 'detail' good.id%}" target="_blank">
+														<img src="/static/loadimg/l_md_{{ good.picname }}" class="f-fl">
+														</a>
+														<div class="describe f-fl col-xs-8 col-sm-8">
+														<div class="vertic clearfix">
+														<span class="clearfix">
+														<a class="productDetail nameWidth" href="{% url 'detail' good.id%}" target="_blank">
+														<i>{{detail.name}}</i></a>
+														{% endif%}
+														{% endfor%}
+														<p onum="{{detail.num}}" class="denum">
+														{{detail.price}}×{{detail.num}}
+														</p>
+														</span>
+														</div>
+														</div>
+														
+													</div>
+													{% endif%}
+													{% endfor %}
+												</div>
+											</div>
+										</td>
+										<td class="b-r w125 center price b-t hidden-xs hidden-sm" rowspan="3">
+											<div class="priceDiv">
+											{{order.total}}
+
+											</div>
+										</td>
+										<td class="b-r w125 center state b-t hidden-xs hidden-sm">
+											<div class="stateDiv">
+												<div class="ordstatediv" ods = "{{order.status}}">
+												{% if order.status == 0%}
+												新订单
+												{% elif order.status == 1%}
+												已发货
+												{% elif order.status == 2%}
+												已收货
+												{% elif order.status == 3%}
+												无效订单
+												{%endif%}
+												<br></div>
+
+											</div>
+										</td>
+										<td class="w125 center opreat b-t hidden-xs hidden-sm">
+											<ul>
+											<li class="more"><a href="{% url 'orderdetail' order.id%}" target="_blank">查看详情</a></li>
+											<li class="more"><button  id="O_verify" class="btn btn-primary " style="display:inline-block;">确认收货</button></li>
+											</ul>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							{% endif %}
+							{% endfor%}
+						</div><!-- 已发货订单 E-->
+						<!-- 已收货订单 -->
+						<div role="tabpanel" class="tab-pane clearfix ui-load-content" id="order4">
+							{% for order in orderlist%}
+							{% if order.status == 2%}
+							<table class="orderItem">
+								<tbody>
+									<tr class="trHead hidden-xs hidden-sm">
+										<td colspan="4" class="title clearfix">
+										<div class="f-fl">下单时间：
+										<span class="time">{{order.addtime}}</span>
+										订单ID：
+										<span class="orderNumber">{{order.id}}</span>
+										</div>
+										</td>
+									</tr>
+									<tr class="list-box b-l b-r b-b hiddens">
+										<td class="list b-r j-iamCart">
+											<div class="cart-wrap j-CartWrap">
+												<div class="shop j-shop j-amLight">
+													{% for detail in detaillist%}
+													{% if detail.orderid == order.id%}
+													<div class="item b-t clearfix j-item j-iamMain">
+														{% for good in goodslist%}
+														{% if good.id == detail.goodsid%}
+														<a class="productDetail nameWidth col-xs-4 col-sm-4" href="{% url 'detail' good.id%}" target="_blank">
+														<img src="/static/loadimg/l_md_{{ good.picname }}" class="f-fl">
+														</a>
+														<div class="describe f-fl col-xs-8 col-sm-8">
+														<div class="vertic clearfix">
+														<span class="clearfix">
+														<a class="productDetail nameWidth" href="{% url 'detail' good.id%}" target="_blank">
+														<i>{{detail.name}}</i></a>
+														{% endif%}
+														{% endfor%}
+														<p>
+														{{detail.price}}×{{detail.num}}
+														</p>
+														</span>
+														</div>
+														</div>
+														
+													</div>
+													{% endif%}
+													{% endfor %}
+												</div>
+											</div>
+										</td>
+										<td class="b-r w125 center price b-t hidden-xs hidden-sm" rowspan="3">
+											<div class="priceDiv">
+											{{order.total}}
+
+											</div>
+										</td>
+										<td class="b-r w125 center state b-t hidden-xs hidden-sm">
+											<div class="stateDiv">
+											<div>
+											{% if order.status == 0%}
+											新订单
+											{% elif order.status == 1%}
+											已发货
+											{% elif order.status == 2%}
+											已收货
+											{% elif order.status == 3%}
+											无效订单
+											{%endif%}
+											<br></div>
+
+											</div>
+										</td>
+										<td class="w125 center opreat b-t hidden-xs hidden-sm">
+											<ul>
+											<li class="more"><a href="{% url 'orderdetail' order.id%}" target="_blank">查看详情</a></li>
+											</ul>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							{% endif %}
+							{% endfor%}
+						</div><!-- 已收货订单 E-->
+						<!-- 其他/无效订单 -->
+						<div role="tabpanel" class="tab-pane clearfix ui-load-content" id="order5">
+							{% for order in orderlist%}
+							{% if order.status == 3%}
+							<table class="orderItem">
+								<tbody>
+									<tr class="trHead hidden-xs hidden-sm">
+										<td colspan="4" class="title clearfix">
+										<div class="f-fl">下单时间：
+										<span class="time">{{order.addtime}}</span>
+										订单ID：
+										<span class="orderNumber">{{order.id}}</span>
+										</div>
+										</td>
+									</tr>
+									<tr class="list-box b-l b-r b-b hiddens">
+										<td class="list b-r j-iamCart">
+											<div class="cart-wrap j-CartWrap">
+												<div class="shop j-shop j-amLight">
+													{% for detail in detaillist%}
+													{% if detail.orderid == order.id%}
+													<div class="item b-t clearfix j-item j-iamMain">
+														{% for good in goodslist%}
+														{% if good.id == detail.goodsid%}
+														<a class="productDetail nameWidth col-xs-4 col-sm-4" href="{% url 'detail' good.id%}" target="_blank">
+														<img src="/static/loadimg/l_md_{{ good.picname }}" class="f-fl">
+														</a>
+														<div class="describe f-fl col-xs-8 col-sm-8">
+														<div class="vertic clearfix">
+														<span class="clearfix">
+														<a class="productDetail nameWidth" href="{% url 'detail' good.id%}" target="_blank">
+														<i>{{detail.name}}</i></a>
+														{% endif%}
+														{% endfor%}
+														<p>
+														{{detail.price}}×{{detail.num}}
+														</p>
+														</span>
+														</div>
+														</div>
+														
+													</div>
+													{% endif%}
+													{% endfor %}
+												</div>
+											</div>
+										</td>
+										<td class="b-r w125 center price b-t hidden-xs hidden-sm" rowspan="3">
+											<div class="priceDiv">
+											{{order.total}}
+
+											</div>
+										</td>
+										<td class="b-r w125 center state b-t hidden-xs hidden-sm">
+											<div class="stateDiv">
+											<div>
+											{% if order.status == 0%}
+											新订单
+											{% elif order.status == 1%}
+											已发货
+											{% elif order.status == 2%}
+											已收货
+											{% elif order.status == 3%}
+											无效订单
+											{%endif%}
+											<br></div>
+											{{num}}
+											</div>
+										</td>
+										<td class="w125 center opreat b-t hidden-xs hidden-sm">
+											<ul>
+											<li class="more"><a href="{% url 'orderdetail' order.id%}" target="_blank">查看详情</a></li>
+											</ul>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							{% endif %}
+							{% endfor%}
+						</div><!-- 其他/无效订单E -->
+					</div>
+					
+				</div>
+			</div>
+		</div>	
+	</div>
+</div>
+<!-- 主内容区域 E-->
+<script type="text/javascript">
+	//订单展开收起
+	navOpenClose();
+	//按钮点击订单状态修改
+	offStatChange()
+</script>
+	
+{%endblock%}

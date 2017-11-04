@@ -1,0 +1,124 @@
+{% extends "myadmin/base.html" %}
+
+
+
+{% block mainbody %}		
+{% load static from staticfiles %}
+<link href="{% static 'myadmin/css/users.css' %}" rel="stylesheet">
+<script src="{% static 'myadmin/js/users.js' %}"></script>
+
+	<h3>
+		会员信息管理
+	</h3>
+	<form id="edit-profile" class="form-horizontal usersadd" action="{% url 'myadmin_usersinsert'%}" method="post">
+	{% csrf_token %}
+		<fieldset>
+			<legend>添加会员信息</legend>
+			<div class="control-group">
+				<label class="control-label" for="input01">用户名</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input01"  name="username" />
+					<label class="hidden hid-label" id="unameVerify"></label> 
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">真实姓名</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input01" name="name" />
+					<label class="hidden hid-label" id="nameVerify"></label> 
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">密码</label>
+				<div class="controls">
+					<input type="password" class="input-xlarge" id="input01"  name="passwd" value="" />
+					<label class="hidden hid-label" id="passVerify"></label> 
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">重复密码</label>
+				<div class="controls">
+					<input type="password" class="input-xlarge" id="input01"  name="repasswd" />
+					<label class="hid-label" id="repassVerify">{{info}}</label> 
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">性别</label>
+				<div class="controls">
+					<label class="state">
+					    <input type="radio" name="sex" id="optionsRadioss1" value="1" >
+					    	<span class="radio-text">男</span>
+					</label>
+					<label class="state">
+					  	<input type="radio" name="sex" id="optionsRadioss2" value="0" >
+					    	<span class="radio-text">女</span>
+					</label>
+				</div>
+			</div>	
+			<div class="control-group">
+				<label class="control-label" for="input01">手机号</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input01"  name="phone" />
+					<label class="hidden hid-label" id="phoneVerify"></label> 
+
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">邮箱</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input01" name="email" />
+					<label class="hidden hid-label" id="emailVerify"></label> 
+
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">邮编</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input01"  name="code" />
+					<label class="hidden hid-label" id="codeVerify"></label> 
+
+				</div>
+			</div>							
+			<div class="control-group">
+				<label class="control-label" for="textarea">地址</label>
+				<div class="controls">
+					<textarea class="input-xlarge" id="textarea" rows="4" name="address"></textarea>
+					<label class="hidden hid-label" id="addressVerify"></label> 
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">状态</label>
+				<div class="controls">
+					 <label class="state">
+					    <input type="radio" name="state" id="optionsRadios1" value="1" >
+					    	<span class="radio-text">启用</span>
+					</label>
+					<label class="state">
+					  	<input type="radio" name="state" id="optionsRadios2" value="2" >
+					    	<span class="radio-text">禁用</span>
+					</label>
+					<label class="state">
+					  	<input type="radio" name="state" id="optionsRadios3" value="0" >
+					    	<span class="radio-text">后台管理员</span>
+					</label>
+				</div>
+			</div>							
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">添加</button> <button class="btn reset" type="reset">重置</button>
+			</div>
+		</fieldset>
+	</form>
+	<div class="hidden">
+		{% for users in userslists %}
+			<div class="unItem">
+				{{users.username}}
+			</div>
+		{%endfor%}
+	</div>
+	<script type="text/javascript">
+		//正则判断
+		addUsersVerify();
+
+
+	</script>
+{% endblock %}

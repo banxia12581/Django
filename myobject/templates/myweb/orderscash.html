@@ -1,0 +1,136 @@
+{% extends "myweb/base.html" %}
+{% load static from staticfiles %}
+
+{#追加当前页的css样式#}
+{%block mylink%}
+  <link rel="stylesheet" type="text/css" href="{% static 'myweb/css/orderadd.css' %}">
+{%endblock%}
+
+{# 加载主体内容 #}
+{%block content%}
+  
+
+<!-- 主内容区域 -->
+<div class="mainbody orderadd orderorderadd-app">
+	<div class="container">
+		<!-- 面包屑 导航 -->
+		<div class="ml-nav hidden-xs hidden-sm">
+			<ol class="breadcrumb">
+				<ol class="breadcrumb">
+					<li>购物车</li>
+					<li >订单信息</li>
+					<li >确认订单</li>
+					<li class="active">支付</li>
+					<li>完成 </li>
+				</ol>
+			</ol>
+		</div><!-- 面包屑 导航 E-->
+
+		<!-- 收货人信息 -->
+		<form action="#" method="post" >
+		{% csrf_token %}
+			<div class="payment-body" onload="init();">
+				<div class="payment-info clearfix">
+					<div class="payment-info-content">
+						<div class="payment-info-title">
+							应付金额<span class="payment-info-total">￥{{orderstotal}}</span>
+						</div>
+						<p>订单ID：{{ordersid}}</p>
+						<p>请您在提交订单后 <span class="payment-info-time" id="paymentInfoTime">  </span> 内完成支付，否则订单会自动取消。</p>
+					</div>
+				</div>
+				<div class="payment-tools">
+					<div class="mz-tab" id="mzTab">
+						<ul class="nav nav-tabs  clearfix mz-tab-handlers" role="tablist-1">
+							<li role="presentation" class="active mz-tab-handler">
+								<a href="#zhifu1" aria-controls="zhifu1" role="tab" data-toggle="tab">
+									支付宝
+								</a>
+							</li>
+							<li role="presentation" class="mz-tab-handler">
+								<a href="#zhifu2" aria-controls="zhifu2" role="tab" data-toggle="tab">网上银行 </a>
+							</li>
+						</ul>
+						<ul class="mz-tab-panels">
+							<li class="mz-tab-panel clearfix alipay active tab-pane clearfix"  role="tabpanel" id="zhifu1">
+								<div class="payment-tools-alipay-left">
+									<p class="payment-tools-alipay-title">
+									使用手机支付宝扫码支付
+									</p>
+									<div class="payment-tools-alipay-qrcode">
+										<img src="{% static 'myweb/img/order/c03.jpg' %}">
+									</div>
+								</div>
+								<div class="payment-tools-alipay-web">
+									<button type="submit" id="submitForm" class="btn btn-danger btn-lg payment-tools-submit" style="display:inline-block;">立即支付</button>
+								</div>
+							</li>
+							<li class="mz-tab-panel clearfix banks tab-pane" role="tabpanel" id="zhifu2">
+								<div class="payment-tools-alipay-yh">
+									<ul class="payment-tools-list clearfix">
+										<li class="payment-tools-label boc active">
+											<input name="optionsRadios" id="optionsRadios1" value="option1" checked="" type="radio">
+											<div class="payment-tools-img">
+												<img src="{% static 'myweb/img/order/c01.png' %}">
+											</div>
+										</li>
+										<li class="payment-tools-label ccb">
+											<input name="optionsRadios" id="optionsRadios2" value="option2" checked="" type="radio">
+											<div class="payment-tools-img">
+												<img src="{% static 'myweb/img/order/c02.png' %}">
+											</div>
+										</li>
+									</ul>
+									<div class=" payment-tools-submit">
+										<button type="submit" id="submitForm" class="btn btn-danger btn-lg " style="display:inline-block;">立即支付</button>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</form>
+	</div>
+</div>
+<!-- 主内容区域 E-->
+	
+<!-- 返回顶部 E-->
+<script type="text/javascript">//回顶部
+	//全选
+	allSelect();
+	//商品数量加减
+	cartAddMin();
+	//倒计时
+	// timeOut()
+	var time;    
+	var showDiv=$("#paymentInfoTime");
+	var h=23;
+	var m=59;
+	var s=59;
+	
+	
+	//倒计时时间
+	time=setInterval("run()",1000);
+	
+	//进行倒计时显示
+	function run(){
+	    --s;
+	    if(s<0){
+	        --m;
+	        s=59;
+	    }
+	    if(m<0){
+	        --h;
+	        m=59
+	    }
+	    if(h<0){
+	        s=0;
+	        m=0;
+	    }
+	    showDiv.html(h+"小时"+m+"分"+s+"秒");
+	}
+</script>
+    
+{%endblock%}
